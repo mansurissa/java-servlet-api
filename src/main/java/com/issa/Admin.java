@@ -13,7 +13,7 @@ public class Admin extends User {
 
 		if (!this.checkPassword(this.password) && this.password.length() != 10) {
 
-			return "Password does not meet the requirements";
+			return "Password rule not met";
 
 		}
 
