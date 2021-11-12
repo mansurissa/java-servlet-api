@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Java Servlet</title>
+  </head>
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  
+  <body>
+   <div class="flex nav">
+      <h3>Java Servlet</h3>
+      <div class="flex">
+        <h3 id="username">
+          <span class="iconify userName" data-icon="topcoat:user" ></span> 
+        </h3>
+      </div>
+    </div>
+    <form class="form profiledata">
+      <h3>Profile</h3>
+      <div class="icondiv">
+        <span class="iconify" data-icon="topcoat:user"></span>
+        <input class="name" type="text" placeholder="Username" id="username" disabled /><br />
+      </div>
+      <br />
+      <div class="icondiv">
+        <span class="iconify" data-icon="topcoat:email"></span>
+        <input class="name" type="text" placeholder="email" id="email" disabled /><br />
+      </div>
+      <br />
+      <div class="icondiv">
+        <span
+          class="iconify"
+          data-icon="bx:bxs-lock-alt"
+          data-inline="false"
+        ></span>
+        <input
+          class="name"
+          type="password"
+          name=""
+          id="password"
+          placeholder="Password"
+          disabled
+        /><br />
+      </div>
+      <br />
+      <div style="display: flex; justify-content: space-between">
+        <div class="icondiv fullname" style="width: 48%">
+          <span
+            class="iconify"
+            data-icon="bi:person-fill"
+            data-inline="false"
+          ></span>
+          <input class="name" type="text" placeholder="First Name" id="firstname" disabled /><br />
+        </div>
+        <br />
+        <div class="icondiv fullname" style="width: 48%">
+          <span
+            class="iconify"
+            data-icon="bi:person-fill"
+            data-inline="false"
+          ></span>
+          <input class="name" type="text" placeholder="Last Name" id="lastname" disabled /><br />
+        </div>
+      </div>
+      <br />
+      <div class="icondiv">
+        <span class="iconify" data-icon="topcoat:user"></span>
+        <input class="name" type="number" placeholder="Age" min="1" id="age" disabled /><br />
+      </div>
+      <br />
+      <div class="icondiv">
+        <span
+          class="iconify"
+          data-icon="fe:phone"
+          data-inline="false"
+        ></span>
+        <input
+          class="name"
+          type="tel"
+          name=""
+          id="phone"
+          placeholder="Phone Number"
+          disabled
+        /><br />
+      </div>
+      <br />
+      <div>
+      		<input type="radio" name="gender" value="female" id="" disabled />
+	      	<label for="">Female</label>
+	      	<input type="radio" name="gender" value="male" id="" disabled />
+	      	<label for="">Male</label><br />
+      </div>
+      
+      <p>Select your role</p>
+      <input type="radio" name="role" value="Guest" id="" disabled />
+      <label for="">Guest</label>
+      <input type="radio" name="role" value="Admin" id="" disabled />
+      <label for="">Admin</label><br />
+      <br>
+          
+      
+    </form>
+  </body>
+  <script type="text/javascript">
+  	
+  	const form = document.querySelector(".profiledata");
+	const userName = document.querySelector(".userName");
+  	
+ 	const id = location.href.split("?id=")[1]; 
+  	
+  	const fetchProfile = async(id)  => {
+
+  		const res = await fetch("http://localhost:8080/javaServletApi/profile?id="+id, {
+  	  		
+  			
+  	  		method: "GET",
+  			headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+  	  		
+  	  	});
+  		
+  		const data = await res.json();
+  		userName.innerHTML= "issa"
+  		
+  		for(const i in data){
+  			if(form[i]){
+  				form[i].value = data[i]
+  			}
+  		}
+  		
+  		
+  		
+  	}
+  	
+  	fetchProfile(id);
+  	
+  </script>
+</html>

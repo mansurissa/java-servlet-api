@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Java Servlet</title>
+  </head>
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  
+  <body>
+    <form class="form loginForm">
+      <h3>Login Form</h3>
+      <div class="icondiv">
+        <span class="iconify" data-icon="topcoat:email"></span>
+        <input
+          class="name"
+          type="text"
+          placeholder="Username"
+          name="username"
+        /><br />
+      </div>
+      <br />
+      <div class="icondiv">
+        <span
+          class="iconify"
+          data-icon="bx:bxs-lock-alt"
+          data-inline="false"
+        ></span>
+        <input
+          class="name"
+          type="password"
+          name="password"
+          id=""
+          placeholder="Password"
+        /><br />
+      </div>
+      <br />
+      <button type="submit">Login</button>
+      <p>
+        Don't have an account <span><a href="/javaServletApi/index.html">Register</a></span>
+      </p>
+    </form>
+    
+    <script>
+   	
+    const form = document.querySelector('.loginForm');
+
+    form.addEventListener("submit", async(e) => {
+    	e.preventDefault();
+    	
+    	const username = form.username.value;
+    	const password = form.password.value;
+    	
+    	const data = {
+    		username,
+    		password,
+    	}
+    	
+    	
+    	
+    	var formBody = [];
+    		for (var property in data) {
+    		  var encodedKey = encodeURIComponent(property);
+    		  var encodedValue = encodeURIComponent(data[property]);
+    		  formBody.push(encodedKey + "=" + encodedValue);
+    		}
+    		formBody = formBody.join("&");
+    		
+    		console.log(formBody);
+    	
+    	const res = await fetch("http://localhost:8080/javaServletApi/login", {
+    		
+    		method: "POST",
+    		headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+    		body: formBody
+    		
+    	});
+    	const user = await res.json();
+    	
+    	if(user.code == 200){
+    		location.href="/javaServletApi/profile.html?id="+user.payload.username;
+    	}
+    	else{
+    		alert(user.msg);
+    	}
+    	
+    } );
+   
+    </script>
+  </body>
+</html>
